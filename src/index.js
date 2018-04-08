@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import rootReducer from "./reducers";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import "./index.css";
 import "./resources/pokedex-icon.css";
 import App from "./components/App";

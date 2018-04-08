@@ -1,28 +1,26 @@
 import { connect } from "react-redux";
-import { addNumber, minuNumber, search } from "../actions";
-import  PokemonList  from "../components/PokemonList";
+import { search, orderbytype } from "../actions";
+import PokemonList from "../components/PokemonList";
 
 const mapStateToProps = state => {
     return {
-        number: state.number,
         pokedex: state.pokedex
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNumberClick: num => {
-            dispatch(addNumber(num))
+        searchChange: text => {
+            dispatch(search(text));
         },
-        minuNumberClick: num =>{
-            dispatch(minuNumber(num))
-        },
-        searchChange: text=>{
-            dispatch(search(text))
+        orderByTypeClick: typename => {
+            dispatch(orderbytype(typename));
         }
     };
 };
 
-const DisplayPokemonList = connect(mapStateToProps, mapDispatchToProps)(PokemonList);
+const DisplayPokemonList = connect(mapStateToProps, mapDispatchToProps)(
+    PokemonList
+);
 
 export default DisplayPokemonList;

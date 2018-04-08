@@ -1,40 +1,43 @@
-import React from "react"
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const PokemonList = ({
-    number,
-    pokedex,
-    addNumberClick,
-    minuNumberClick,
-    searchChange
-}) => (
+const PokemonList = ({ pokedex, searchChange, orderByTypeClick }) => (
     <div>
-        <button
-            onClick={() => {
-                addNumberClick(2);
-            }}
-        >
-            +
-        </button>
-        <button
-            onClick={() => {
-                minuNumberClick(1);
-            }}
-        >
-            -
-        </button>
-        <span>show {number}</span>
-        <input
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Fluid jumbotron</h1>
+                <p class="lead">
+                    This is a modified jumbotron that occupies the entire
+                    horizontal space of its parent.
+                </p>
+                <input
             type="text"
             onChange={e => {
                 searchChange(e.target.value);
             }}
         />
-        <table>
+            </div>
+        </div>
+
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Name</th>
+                    <th
+                        onClick={() => {
+                            orderByTypeClick("Number");
+                            console.log(pokedex);
+                        }}
+                    >
+                        #
+                    </th>
+                    <th
+                        onClick={() => {
+                            orderByTypeClick("Name");
+                            console.log(pokedex);
+                        }}
+                    >
+                        Name
+                    </th>
                     <th>Type</th>
                     <th>MaxHP</th>
                     <th>MaxCP</th>
@@ -42,9 +45,9 @@ const PokemonList = ({
                 </tr>
             </thead>
             <tbody>
-                {pokedex.list.map(function(item) {
+                {pokedex.list.map(function(item, idx) {
                     return (
-                        <tr key={item.Number}>
+                        <tr key={idx}>
                             <td>
                                 <i className={`pki pkiAll n${+item.Number}`} />
                                 {item.Number}
@@ -54,7 +57,16 @@ const PokemonList = ({
                                     {item.Name}
                                 </Link>
                             </td>
-                            <td>{item.Types}</td>
+                            <td>
+                                {item.Types.map(t => (
+                                    <span
+                                        key={t}
+                                        class="badge badge-pill badge-primary"
+                                    >
+                                        {t}
+                                    </span>
+                                ))}
+                            </td>
                             <td>{item.MaxHP}</td>
                             <td>{item.MaxCP}</td>
                             <td>{item.FleeRate}</td>
